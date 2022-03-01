@@ -84,26 +84,19 @@ namespace TP_Type_List
             {
                 int rep, selec;
                 string prenom, nom;
-                double salaire;
+                double salaire, compar;
 
-                Console.WriteLine("Menu ---------------");
-                Console.WriteLine("1. Ajouter employé");
-                Console.WriteLine("2. Supprimer employé");
-                Console.WriteLine("3. Afficher employé");
-                Console.WriteLine("4. Afficher employés");
-                Console.WriteLine("5. Afficher salaire moyen");
-                Console.WriteLine("6. Afficher salaire max");
-                Console.WriteLine("7. Afficher salaire min");
-                rep = int.Parse(Console.ReadLine());
+   
 
                 List<Employe2> lesEmployes2 = new List<Employe2>();
                 lesEmployes2.Add(new Employe2("Presnel", "Kimpembe", 50000));
-                //lesEmployes2.Add(new Employe2("Mbappé", "Killian", 200000));
-                //lesEmployes2.Add(new Employe2("da Silva Santos Júnior", "Neymar", 200000));
+                lesEmployes2.Add(new Employe2("Mbappé", "Killian", 200020));
+                lesEmployes2.Add(new Employe2("da Silva Santos Júnior", "Neymar", 200000));
 
                 do
                 {
-                    Console.WriteLine("Menu ---------------");
+                    Console.WriteLine("");
+                    Console.WriteLine("--------------- [Menu] ---------------");
                     Console.WriteLine("1. Ajouter employé");
                     Console.WriteLine("2. Supprimer employé");
                     Console.WriteLine("3. Afficher employé");
@@ -111,52 +104,110 @@ namespace TP_Type_List
                     Console.WriteLine("5. Afficher salaire moyen");
                     Console.WriteLine("6. Afficher salaire max");
                     Console.WriteLine("7. Afficher salaire min");
+                    Console.WriteLine("--------------------------------------");
+                    Console.Write(">> ");
                     rep = int.Parse(Console.ReadLine());
+                    Console.WriteLine("");
 
-                    switch (rep)
+                    try
                     {
-                        case 1:
-                            Console.WriteLine("Ajout d'un employé ------");
-                            Console.WriteLine("Nom de l'employé :");
-                            prenom = Console.ReadLine();
-                            Console.WriteLine("Prénom de l'employé :");
-                            nom = Console.ReadLine();
-                            Console.WriteLine("Salaire de l'employé :");
-                            salaire = double.Parse(Console.ReadLine());
-                            lesEmployes2.Add(new Employe2(prenom, nom, salaire));
-                            break;
-                        case 2:
-                            Console.WriteLine("Suppression d'un employé ------");
-                            for (int i = 0; i < lesEmployes2.Count(); i++)
-                            {
-                                Console.WriteLine(i + ". " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
-                            }
-                            selec = int.Parse(Console.ReadLine());
-                            Console.WriteLine("Suppression... (" + lesEmployes2[selec].getNom() + " " + lesEmployes2[selec].getPrenom() + ")");
-                            lesEmployes2.RemoveAt(selec);
-                            Console.WriteLine("Supprimé.");
-                            break;
-                        case 3:
-                            Console.WriteLine("Affichage d'un employé ------");
-                            for (int i = 0; i < lesEmployes2.Count(); i++)
-                            {
-                                Console.WriteLine(i + ". " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
-                            }
-                            selec = int.Parse(Console.ReadLine());
-                            Console.WriteLine("Profil employé n°" + selec);
-                            Console.WriteLine("Nom : " + lesEmployes2[selec].getNom());
-                            Console.WriteLine("Prénom : " + lesEmployes2[selec].getPrenom());
-                            Console.WriteLine("Salaire : " + lesEmployes2[selec].getSalaire() + " euros");
-                            Console.WriteLine("");
-                            break;
-                        case 4:
-                            Console.WriteLine("Affichage des employés ------");
-                            for (int i = 0; i < lesEmployes2.Count(); i++)
-                            {
-                                Console.WriteLine("n°" + i + " " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
-                            }
-                            break;
+                    
+
+                        switch (rep)
+                        {
+                            case 1:
+                                Console.WriteLine("[Ajout d'un employé]");
+                                Console.WriteLine("Nom de l'employé :");
+                                Console.Write(">> ");
+                                prenom = Console.ReadLine();
+                                Console.WriteLine("Prénom de l'employé :");
+                                Console.Write(">> ");
+                                nom = Console.ReadLine();
+                                Console.WriteLine("Salaire de l'employé :");
+                                Console.Write(">> ");
+                                salaire = double.Parse(Console.ReadLine());
+                                lesEmployes2.Add(new Employe2(prenom, nom, salaire));
+                                Console.WriteLine("");
+                                Console.WriteLine("[+] " + prenom + " " + nom + " ajouté");
+                                break;
+                            case 2:
+                                Console.WriteLine("[Suppression d'un employé]");
+                                for (int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    Console.WriteLine(i + ". " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
+                                }
+                                Console.Write(">> ");
+                                selec = int.Parse(Console.ReadLine());
+                                Console.WriteLine("");
+                                Console.WriteLine("Suppression de " + lesEmployes2[selec].getNom() + " " + lesEmployes2[selec].getPrenom() + "...");
+                                lesEmployes2.RemoveAt(selec);
+                                Console.WriteLine("[-] Supprimé");
+                                break;
+                            case 3:
+                                Console.WriteLine("[Affichage d'un employé]");
+                                for (int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    Console.WriteLine(i + ". " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
+                                }
+                                Console.Write(">> ");
+                                selec = int.Parse(Console.ReadLine());
+                                Console.WriteLine("");
+                                Console.WriteLine("Profil employé n°" + selec);
+                                Console.WriteLine("Nom : " + lesEmployes2[selec].getNom());
+                                Console.WriteLine("Prénom : " + lesEmployes2[selec].getPrenom());
+                                Console.WriteLine("Salaire : " + lesEmployes2[selec].getSalaire() + " euros");
+                                Console.WriteLine("");
+                                break;
+                            case 4:
+                                Console.WriteLine("[Affichage des employés]");
+                                for (int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    Console.WriteLine("n°" + i + " " + lesEmployes2[i].getNom() + " " + lesEmployes2[i].getPrenom());
+                                }
+                                break;
+                            case 5:
+                                Console.WriteLine("[Affichage salaire moyen]");
+                                salaire = 0;
+                                for(int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    salaire += lesEmployes2[i].getSalaire();
+                                }
+                                salaire = salaire / lesEmployes2.Count();
+                                Console.WriteLine("Le salaire moyen des " + lesEmployes2.Count() + " employés est de " + salaire + "e.");
+                                break;
+                            case 6:
+                                Console.WriteLine("[Affichage salaire maximal]");
+                                salaire = lesEmployes2[0].getSalaire();
+                                for (int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    if (lesEmployes2[i].getSalaire() > salaire)
+                                    {
+                                        salaire = lesEmployes2[i].getSalaire();
+                                    }
+                                }
+                                Console.WriteLine("Le plus gros salaire des " + lesEmployes2.Count() + " employés est de " + salaire + "e.");
+                                break;
+                            case 7:
+                                Console.WriteLine("[Affichage salaire minimum]");
+                                salaire = lesEmployes2[0].getSalaire();
+                                for (int i = 0; i < lesEmployes2.Count(); i++)
+                                {
+                                    if (lesEmployes2[i].getSalaire() < salaire)
+                                    {
+                                        salaire = lesEmployes2[i].getSalaire();
+                                    }
+                                }
+                                Console.WriteLine("Le plus petit salaire des " + lesEmployes2.Count() + " employés est de " + salaire + "e.");
+                                break;
+
+                        }
+
+                    }catch (Exception erreur)
+                    {
+                        Console.WriteLine("erreur ! (non fini)");
                     }
+
+
                 } while (rep > 0);
                
             }
